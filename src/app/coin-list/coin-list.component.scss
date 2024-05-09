@@ -1,0 +1,9 @@
+@use "../../global" as *;
+
+.mat-mdc-row {
+    cursor: pointer;
+
+    &:hover {
+        background-color: $lightBlue;
+    }
+  }

@@ -1,18 +1,31 @@
 @use "../global" as *;
 
-.app-title {
+.app-frame {
     height: 100%;
     display: flex;
-    align-items: center;
-    box-sizing: border-box;
-    padding: $smallGap;
-    column-gap: $smallGap;
+    flex-direction: column;
 
-    img {
-        height: 100%;
+    .mat-toolbar {
+        background-color: $primaryBlue;
+        color: $white;
+
+        .app-title {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            box-sizing: border-box;
+            padding: $smallGap;
+            column-gap: $smallGap;
+        
+            img {
+                height: 100%;
+            }
+        }
     }
-}
 
-.page-container {
-    padding: $largeGap;
+    .page-container {
+        flex: 1;
+        background-color: $lightBlue;
+        padding: $largeGap;
+    }
 }
