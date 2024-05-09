@@ -1,0 +1,14 @@
+@use "../global" as *;
+
+.app-title {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding: $smallGap;
+    column-gap: $smallGap;
+
+    img {
+        height: 100%;
+    }
+}
