@@ -1,0 +1,46 @@
+import { Currency } from './currency.model';
+
+export interface MarketData {
+  current_price: Currency | null;
+  total_value_locked: number | null;
+  mcap_to_tvl_ratio: number | null;
+  fdv_to_tvl_ratio: number | null;
+  roi: number | null;
+  ath: Currency;
+  ath_change_percentage: Currency;
+  ath_date: Currency;
+  atl: Currency;
+  atl_change_percentage: Currency;
+  atl_date: Currency;
+  market_cap: Currency;
+  market_cap_rank: number | null;
+  fully_diluted_valuation: Currency;
+  total_volume: Currency;
+  high_24h: Currency;
+  low_24h: Currency;
+  price_change_24h: number;
+  price_change_percentage_24h: number;
+  price_change_percentage_7d: number;
+  price_change_percentage_14d: number;
+  price_change_percentage_30d: number;
+  price_change_percentage_60d: number;
+  price_change_percentage_200d: number;
+  price_change_percentage_1y: number;
+  market_cap_change_24h: number;
+  market_cap_change_percentage_24h: number;
+  price_change_24h_in_currency: Currency;
+  price_change_percentage_1h_in_currency: Currency;
+  price_change_percentage_24h_in_currency: Currency;
+  price_change_percentage_7d_in_currency: Currency;
+  price_change_percentage_14d_in_currency: Currency;
+  price_change_percentage_30d_in_currency: Currency;
+  price_change_percentage_60d_in_currency: Currency;
+  price_change_percentage_200d_in_currency: Currency;
+  price_change_percentage_1y_in_currency: Currency;
+  market_cap_change_24h_in_currency: Currency;
+  market_cap_change_percentage_24h_in_currency: Currency;
+  total_supply: number | null;
+  max_supply: number | null;
+  circulating_supply: number | null;
+  last_updated: Date;
+}
