@@ -1,15 +1,24 @@
 // Reusable variables
 
+// Font sizes
+$heading-size: 36px;
+$subheading-size: 24px;
+$body1-text-size: 18px;
+$body2-text-size: 14px;
+
 // Gaps for margins, paddings, flex and grid gaps
-$xxsGap: 4px;
-$xsGap: 8px;
-$smallGap: 12px;
-$mediumGap: 20px;
-$largeGap: 32px;
-$xlGap: 52px;
+$xxs-gap: 4px;
+$xs-gap: 8px;
+$small-gap: 12px;
+$medium-gap: 20px;
+$large-gap: 32px;
+$xl-gap: 64px;
 
 // Colors
-$primaryBlue: #3d5e9a;
-$secondaryBlue: #5e7ebb;
-$lightBlue: #e7ecf5;
+$primary-blue: #3d5e9a;
+$secondary-blue: #5e7ebb;
+$light-blue: #e7ecf5;
+$gray: #555555;
 $white: #ffffff;
+
+$default-border-radius: 8px;

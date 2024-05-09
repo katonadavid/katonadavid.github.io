@@ -1,0 +1,101 @@
+@use "../../global" as *;
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  margin-bottom: $medium-gap;
+
+  * {
+    color: $gray;
+    text-decoration: none;
+  }
+}
+
+.mat-mdc-card {
+  display: flex;
+  flex-direction: row;
+  gap: $xl-gap;
+  padding: $large-gap;
+  border-radius: $default-border-radius;
+}
+
+.coin-details {
+  width: 260px;
+  max-width: 260px;
+  display: flex;
+  flex-direction: column;
+  gap: $medium-gap;
+
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $medium-gap;
+
+    img {
+      height: 80px;
+    }
+
+    .coin-name {
+      display: flex;
+      flex-direction: column;
+      gap: $xxs-gap;
+      text-align: right;
+
+      .name {
+        font-size: $subheading-size;
+        font-weight: bold;
+      }
+
+      .symbol {
+        color: $gray;
+      }
+    }
+  }
+
+  .bottom {
+    display: flex;
+    flex-direction: column;
+    gap: $large-gap;
+    
+    .coin-detail {
+      color: $gray;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      font-size: $body2-text-size;
+      gap: $small-gap;
+
+      .header {
+        display: flex;
+        align-items: center;
+        gap: $small-gap;
+        background-color: $light-blue;
+        padding: $xxs-gap;
+        border-radius: $default-border-radius;
+      }
+      
+
+      .categories {
+        display: flex;
+        flex-wrap: wrap;
+        gap: $xxs-gap;
+      }
+
+      .links {
+        display: flex;
+        flex-direction: column;
+        gap: $xxs-gap;
+        max-width: 260px;
+
+        a {
+          color: gray;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+  }
+}

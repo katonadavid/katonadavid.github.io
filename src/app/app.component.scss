@@ -6,16 +6,19 @@
     flex-direction: column;
 
     .mat-toolbar {
-        background-color: $primaryBlue;
+        position: fixed;
+        background-color: $primary-blue;
         color: $white;
+        padding: 0px $xl-gap;
+        z-index: 1;
 
         .app-title {
             height: 100%;
             display: flex;
             align-items: center;
             box-sizing: border-box;
-            padding: $smallGap;
-            column-gap: $smallGap;
+            padding: $small-gap;
+            gap: $small-gap;
         
             img {
                 height: 100%;
@@ -24,8 +27,9 @@
     }
 
     .page-container {
+        margin-top: var(--mat-toolbar-standard-height);
         flex: 1;
-        background-color: $lightBlue;
-        padding: $largeGap;
+        background-color: $light-blue;
+        padding: $large-gap $xl-gap;
     }
 }

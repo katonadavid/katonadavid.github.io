@@ -1,9 +1,14 @@
 @use "../../global" as *;
 
+.mat-mdc-table {
+    border-radius: $default-border-radius;
+    overflow: hidden;
+}
+
 .mat-mdc-row {
     cursor: pointer;
 
     &:hover {
-        background-color: $lightBlue;
+        background-color: $light-blue;
     }
   }
