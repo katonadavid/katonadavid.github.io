@@ -79,8 +79,6 @@ export class CoinDetailsComponent implements OnInit, AfterViewInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: ([market]) => {
-          console.log(market);
-          
           if (market.prices?.length > 1) {
             new Chart(this.priceChart.nativeElement, {
               type: 'line',
