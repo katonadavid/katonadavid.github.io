@@ -1,7 +1,7 @@
 # CoinLion
 
 CoinLion is an Angular application that uses CoinGecko's API to get the latest cryptocurrency data.
-It uses Angular 17, Angular Material, Google Icons and Chart.js
+It uses Angular 17, Angular Material, Google Icons and Chart.js.
 
 # How to run
 
