@@ -38,11 +38,10 @@ export class CoinDetailsComponent implements OnInit, AfterViewInit {
   coinId: string;
 
   coin: Coin;
-  priceDataUnavailable: boolean;
   coinDetailsLoading: boolean;
   priceChartLoading: boolean;
-
-  private chart: Chart;
+  coinLoadingError: boolean;
+  priceDataUnavailable: boolean;
 
   private readonly chartRangeInDays = 7;
   private readonly chartCurrency = 'eur';
@@ -58,9 +57,15 @@ export class CoinDetailsComponent implements OnInit, AfterViewInit {
     this.coinService
       .getCoinDetails(this.coinId)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((coin: Coin) => {
-        this.coin = coin;
-        this.coinDetailsLoading = false;
+      .subscribe({
+        next: (coin: Coin) => {
+          this.coin = coin;
+          this.coinDetailsLoading = false;
+        },
+        error: () => {
+          this.coinLoadingError = true;
+          this.coinDetailsLoading = false;
+        }
       });
 
     forkJoin([
@@ -74,8 +79,10 @@ export class CoinDetailsComponent implements OnInit, AfterViewInit {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: ([market]) => {
+          console.log(market);
+          
           if (market.prices?.length > 1) {
-            this.chart = new Chart(this.priceChart.nativeElement, {
+            new Chart(this.priceChart.nativeElement, {
               type: 'line',
               data: {
                 labels: Object.values(market.prices).map((priceRecord) =>
@@ -108,6 +115,7 @@ export class CoinDetailsComponent implements OnInit, AfterViewInit {
         },
         error: () => {
           this.priceDataUnavailable = true;
+          this.priceChartLoading = false;
         },
       });
   }
