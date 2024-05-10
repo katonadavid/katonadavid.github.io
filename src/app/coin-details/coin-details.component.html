@@ -1,67 +1,74 @@
-<div class="breadcrumbs">
-  <a routerLink="/">Cryptocurrencies</a>
-  <mat-icon>chevron_right</mat-icon>
-  <span>{{ coin.name }}</span>
-</div>
-<mat-card>
-  <div class="coin-details">
-    <div class="top">
-      <img [src]="coin.image.large" [alt]="coin.name" />
-      <div class="coin-name">
-        <span class="name">{{ coin.name }}</span>
-        <span class="symbol">{{ coin.symbol }}</span>
-      </div>
-    </div>
-    <div class="bottom">
-      <div class="coin-detail">
-        <div class="header">
-          <mat-icon class="material-icons-outlined">category</mat-icon>
-          <span>Category</span>
-        </div>
-        <div class="categories">
-          @for (category of coin.categories; track category) {
-            <span class="category">{{ category }}</span>
-          }
+@if (coin) {
+  <div class="breadcrumbs">
+    <a routerLink="/">Cryptocurrencies</a>
+    <mat-icon>chevron_right</mat-icon>
+    <span>{{ coin.name }}</span>
+  </div>
+
+  <mat-card>
+    <div class="coin-details">
+      <div class="top">
+        <img [src]="coin.image.large" [alt]="coin.name" />
+        <div class="coin-name">
+          <span class="name">{{ coin.name }}</span>
+          <span class="symbol">{{ coin.symbol }}</span>
         </div>
       </div>
-      @if (coin.genesis_date) {
-        <div class="coin-detail">
-          <div class="header">
-            <mat-icon class="material-icons-outlined">event</mat-icon>
-            <span>Genesis date</span>
+      <div class="bottom">
+        @if (coin.categories.length > 0) {
+          <div class="coin-detail">
+            <div class="header">
+              <mat-icon class="material-icons-outlined">category</mat-icon>
+              <span>Category</span>
+            </div>
+            <div class="categories">
+              @for (category of coin.categories; track category) {
+                <span class="category">{{ category }}</span>
+              }
+            </div>
           </div>
-          <span class="genesis-date">{{ coin.genesis_date }}</span>
-        </div>
-      }
+        }
 
-      @if (coin.market_data?.current_price?.eur) {
-        <div class="coin-detail">
-          <div class="header">
-            <mat-icon class="material-icons-outlined">payments</mat-icon>
-            <span>Current price</span>
+        @if (coin.genesis_date) {
+          <div class="coin-detail">
+            <div class="header">
+              <mat-icon class="material-icons-outlined">event</mat-icon>
+              <span>Genesis date</span>
+            </div>
+            <span class="genesis-date">{{ coin.genesis_date }}</span>
           </div>
-          <span class="price">
-            € {{ coin.market_data?.current_price?.eur }}
-          </span>
-        </div>
-      }
+        }
 
-      @if (coin.links.homepage.filter.length > 0) {
-        <div class="coin-detail">
-          <div class="header">
-            <mat-icon class="material-icons-outlined">language</mat-icon>
-            <span>Websites</span>
+        @if (coin.market_data?.current_price?.eur) {
+          <div class="coin-detail">
+            <div class="header">
+              <mat-icon class="material-icons-outlined">payments</mat-icon>
+              <span>Current price</span>
+            </div>
+            <span class="price">
+              € {{ coin.market_data?.current_price?.eur }}
+            </span>
           </div>
-          <div class="links">
-            @for (link of coin.links.homepage | filterArray; track $index) {
-              <a [href]="link" target="_blank">{{ link }}</a>
-            }
+        }
+
+        @if (coin.links.homepage.filter.length > 0) {
+          <div class="coin-detail">
+            <div class="header">
+              <mat-icon class="material-icons-outlined">language</mat-icon>
+              <span>Websites</span>
+            </div>
+            <div class="links">
+              @for (link of coin.links.homepage | filterArray; track $index) {
+                <a [href]="link" target="_blank">{{ link }}</a>
+              }
+            </div>
           </div>
-        </div>
-      }
+        }
+      </div>
     </div>
-  </div>
-  <div class="price-graph">
-    <h1>GRAPH HERE</h1>
-  </div>
-</mat-card>
+
+    <div class="price-chart-container">
+      <canvas #priceChart></canvas>
+    </div>
+  </mat-card>
+}
