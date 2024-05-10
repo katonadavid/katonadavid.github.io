@@ -1,14 +1,42 @@
 @use "../../global" as *;
+@use "@angular/material" as mat;
 
-.mat-mdc-table {
-    border-radius: $default-border-radius;
-    overflow: hidden;
+.page-container {
+  display: flex;
+  flex-direction: column;
+  gap: $medium-gap;
 }
 
-.mat-mdc-row {
-    cursor: pointer;
+.filter-container {
+  display: flex;
+  gap: $medium-gap;
+  
+  .mat-mdc-form-field {
+    @include mat.all-component-densities(-3);
+  }
 
-    &:hover {
-        background-color: $light-blue;
+  @media (max-width: 599px) {
+    flex-direction: column;
+
+    .mat-mdc-form-field {
+      width: 100%;
     }
   }
+}
+
+.table-container {
+  border-radius: $default-border-radius;
+  overflow: hidden;
+
+  .mat-mdc-row {
+    cursor: pointer;
+
+    td {
+      width: 50%;
+    }
+
+    &:hover {
+      background-color: $light-blue;
+    }
+  }
+}

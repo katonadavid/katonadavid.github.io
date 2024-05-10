@@ -13,6 +13,10 @@
         z-index: 1;
         user-select: none;
 
+        @media (max-width: 599px) {
+            padding: 0px $small-gap;
+        }
+
         .app-title {
             height: 100%;
             display: flex;
@@ -35,6 +39,7 @@
         
         @media (max-width: 599px) {
             margin-top: var(--mat-toolbar-mobile-height);
+            padding: $small-gap;
         }
     }
 }

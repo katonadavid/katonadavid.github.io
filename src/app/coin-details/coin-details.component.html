@@ -68,7 +68,13 @@
     </div>
 
     <div class="price-chart-container">
-      <canvas #priceChart></canvas>
+      @if (!priceDataUnavailable) {
+        <canvas #priceChart></canvas>
+      } @else {
+        <div class="no-data-message">
+          <h3>Price data for this token is unavailable.</h3>
+        </div>
+      }
     </div>
   </mat-card>
 }

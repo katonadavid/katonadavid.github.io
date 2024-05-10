@@ -24,6 +24,7 @@ export class CoinDetailsComponent implements OnInit, AfterViewInit {
   coinId: string;
 
   coin: Coin;
+  priceDataUnavailable: boolean;
 
   private chart: Chart;
 
@@ -41,6 +42,7 @@ export class CoinDetailsComponent implements OnInit, AfterViewInit {
 
     forkJoin([this.coinService.getCoinMarket(this.coinId, this.chartCurrency, this.chartRangeInDays), this.viewInitialised$]).pipe(takeUntil(this.destroy$))
     .subscribe(([market]) => {
+      if (market.prices?.length > 1) {
       this.chart = new Chart(
         this.priceChart.first.nativeElement,
         {
@@ -54,10 +56,23 @@ export class CoinDetailsComponent implements OnInit, AfterViewInit {
                 borderColor: COLORS.primaryBlue,
                 backgroundColor: COLORS.lightBlue,
               }
-            ]
+            ],
+          },
+          options: {
+            plugins: {
+              legend: {
+                display: false
+              }
+            },
+            maintainAspectRatio: false
           }
         }
       );
+      } else {
+        this.priceDataUnavailable = true;
+      }
+
+
     })
   }
 
