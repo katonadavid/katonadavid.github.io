@@ -9,7 +9,11 @@
         (keyup)="onFilterChange(FilterField.Name, nameInput.value)"
       />
       @if (appliedFilters[FilterField.Name]) {
-        <button matSuffix mat-icon-button (click)="nameInput.value = ''; clearFilter(FilterField.Name)">
+        <button
+          matSuffix
+          mat-icon-button
+          (click)="nameInput.value = ''; clearFilter(FilterField.Name)"
+        >
           <mat-icon>close</mat-icon>
         </button>
       }
@@ -24,7 +28,11 @@
         (keyup)="onFilterChange(FilterField.Symbol, symbolInput.value)"
       />
       @if (appliedFilters[FilterField.Symbol]) {
-        <button matSuffix mat-icon-button (click)="symbolInput.value = ''; clearFilter(FilterField.Symbol)">
+        <button
+          matSuffix
+          mat-icon-button
+          (click)="symbolInput.value = ''; clearFilter(FilterField.Symbol)"
+        >
           <mat-icon>close</mat-icon>
         </button>
       }
@@ -55,6 +63,29 @@
           *matRowDef="let coin; columns: displayedColumns"
           (click)="openCoinDetails(coin.id)"
         ></tr>
+        <tr class="mat-row" *matNoDataRow>
+          @if (listLoading) {
+            <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+              <div class="spinner-container">
+                <mat-spinner diameter="40"></mat-spinner>
+              </div>
+            </td>
+          } @else {
+            @if (listLoadError) {
+              <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+                <div class="table-message">
+                  <h4>Coin list could not be loaded</h4>
+                </div>
+              </td>
+            } @else {
+              <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+                <div class="table-message">
+                  <h4>No data matching the filters</h4>
+                </div>
+              </td>
+            }
+          }
+        </tr>
       </table>
       <mat-paginator
         [pageSizeOptions]="[10, 25, 50, 100]"

@@ -1,20 +1,32 @@
-@if (coin) {
-  <div class="breadcrumbs">
-    <a routerLink="/">Cryptocurrencies</a>
-    <mat-icon>chevron_right</mat-icon>
+<div class="breadcrumbs">
+  <a routerLink="/">Cryptocurrencies</a>
+  <mat-icon>chevron_right</mat-icon>
+  @if (coinDetailsLoading) {
+    <div class="skeleton"></div>
+  } @else {
     <span>{{ coin.name }}</span>
-  </div>
+  }
+</div>
 
-  <mat-card>
-    <div class="coin-details">
-      <div class="top">
+<mat-card>
+  <div class="coin-details">
+    <div class="top">
+      @if (coinDetailsLoading) {
+        <div class="skeleton"></div>
+      } @else {
         <img [src]="coin.image.large" [alt]="coin.name" />
         <div class="coin-name">
           <span class="name">{{ coin.name }}</span>
           <span class="symbol">{{ coin.symbol }}</span>
         </div>
-      </div>
-      <div class="bottom">
+      }
+    </div>
+    <div class="bottom">
+      @if (coinDetailsLoading) {
+        <div class="skeleton"></div>
+        <div class="skeleton"></div>
+        <div class="skeleton"></div>
+      } @else {
         @if (coin.categories.length > 0) {
           <div class="coin-detail">
             <div class="header">
@@ -51,7 +63,7 @@
           </div>
         }
 
-        @if (coin.links.homepage.filter.length > 0) {
+        @if ((coin.links.homepage | filterArray).length > 0) {
           <div class="coin-detail">
             <div class="header">
               <mat-icon class="material-icons-outlined">language</mat-icon>
@@ -64,17 +76,23 @@
             </div>
           </div>
         }
-      </div>
+      }
     </div>
+  </div>
 
-    <div class="price-chart-container">
-      @if (!priceDataUnavailable) {
-        <canvas #priceChart></canvas>
-      } @else {
+  <div class="price-chart-container">
+    @if (priceChartLoading) {
+      <div class="skeleton"></div>
+    } @else {
+      @if (priceDataUnavailable) {
         <div class="no-data-message">
           <h3>Price data for this token is unavailable.</h3>
         </div>
       }
-    </div>
-  </mat-card>
-}
+    }
+    <canvas
+      #priceChart
+      [ngStyle]="{ display: priceChartLoading ? 'none' : 'block' }"
+    ></canvas>
+  </div>
+</mat-card>

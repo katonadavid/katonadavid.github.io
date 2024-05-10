@@ -11,6 +11,11 @@
     color: $gray;
     text-decoration: none;
   }
+
+  .skeleton {
+    height: 24px;
+    width: 120px;
+  }
 }
 
 .mat-mdc-card {
@@ -19,7 +24,7 @@
   gap: $xl-gap;
   padding: $large-gap;
   border-radius: $default-border-radius;
-  
+
   @media (max-width: 599px) {
     padding: $small-gap;
   }
@@ -64,6 +69,11 @@
         color: $gray;
       }
     }
+
+    .skeleton {
+      height: 80px;
+      width: 100%;
+    }
   }
 
   .bottom {
@@ -102,12 +112,17 @@
         max-width: 260px;
 
         a {
-          color: gray;
+          color: $gray;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
         }
       }
+    }
+
+    .skeleton {
+      height: 32px;
+      width: 100%;
     }
   }
 }
@@ -115,6 +130,11 @@
 .price-chart-container {
   flex: 1;
   overflow: hidden;
+
+  .skeleton {
+    height: 100%;
+    width: 100%;
+  }
 
   .no-data-message {
     display: flex;

@@ -1,45 +1,45 @@
 @use "../global" as *;
 
 .app-frame {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 
-    .mat-toolbar {
-        position: fixed;
-        background-color: $primary-blue;
-        color: $white;
-        padding: 0px $xl-gap;
-        z-index: 1;
-        user-select: none;
+  .mat-toolbar {
+    position: fixed;
+    background-color: $primary-blue;
+    color: $white;
+    padding: 0px $xl-gap;
+    z-index: 1;
+    user-select: none;
 
-        @media (max-width: 599px) {
-            padding: 0px $small-gap;
-        }
-
-        .app-title {
-            height: 100%;
-            display: flex;
-            align-items: center;
-            box-sizing: border-box;
-            padding: $small-gap;
-            gap: $small-gap;
-        
-            img {
-                height: 100%;
-            }
-        }
+    @media (max-width: 599px) {
+      padding: 0px $small-gap;
     }
 
-    .page-container {
-        margin-top: var(--mat-toolbar-standard-height);
-        flex: 1;
-        background-color: $light-blue;
-        padding: $large-gap $xl-gap;
-        
-        @media (max-width: 599px) {
-            margin-top: var(--mat-toolbar-mobile-height);
-            padding: $small-gap;
-        }
+    .app-title {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      padding: $small-gap;
+      gap: $small-gap;
+
+      img {
+        height: 100%;
+      }
     }
+  }
+
+  .page-container {
+    margin-top: var(--mat-toolbar-standard-height);
+    flex: 1;
+    background-color: $light-blue;
+    padding: $large-gap $xl-gap;
+
+    @media (max-width: 599px) {
+      margin-top: var(--mat-toolbar-mobile-height);
+      padding: $small-gap;
+    }
+  }
 }

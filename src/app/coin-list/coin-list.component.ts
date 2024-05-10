@@ -1,14 +1,15 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subject, debounceTime } from 'rxjs';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { CoinService } from '../services/coin.service';
-import { Subject, debounceTime } from 'rxjs';
 import { ListCoin } from '../models/list-coin.model';
 
 enum FilterField {
@@ -31,6 +32,7 @@ type AppliedFilters = {
     MatButtonModule,
     MatInputModule,
     MatIconModule,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './coin-list.component.html',
   styleUrl: './coin-list.component.scss',
@@ -42,14 +44,16 @@ export class CoinListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort)
   sort: MatSort;
 
-  coinListDataSource = new MatTableDataSource<ListCoin>();
-  displayedColumns = ['name', 'symbol'];
-  
   appliedFilters: AppliedFilters = {
-    [FilterField.Name]: "",
-    [FilterField.Symbol]: ""
+    [FilterField.Name]: '',
+    [FilterField.Symbol]: '',
   };
 
+  listLoading: boolean;
+  listLoadError: boolean;
+
+  readonly coinListDataSource = new MatTableDataSource<ListCoin>();
+  readonly displayedColumns = ['name', 'symbol'];
   readonly FilterField = FilterField;
   readonly filterChange$ = new Subject<void>();
 
@@ -61,24 +65,32 @@ export class CoinListComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit() {
-    this.coinService.getCoinList().subscribe((coins) => {
-      this.coinList = coins;
-      this.coinListDataSource.data = this.coinList;
+    this.listLoading = true;
+    this.coinService.getCoinList().subscribe({
+      next: (coins) => {
+        this.coinList = coins;
+        this.coinListDataSource.data = this.coinList;
+        this.listLoading = false;
+      },
+      error: () => {
+        this.listLoadError = true;
+        this.listLoading = false;
+      }
     });
 
     this.filterChange$.pipe(debounceTime(300)).subscribe(() => {
       let filteredData: ListCoin[] = this.coinList;
 
       if (this.appliedFilters?.[FilterField.Name]) {
-        filteredData = this.coinList.filter((c) =>
+        filteredData = this.coinList?.filter((c) =>
           c.name
-        .toLowerCase()
-        .includes(this.appliedFilters[FilterField.Name].toLowerCase()),
-      );
+            .toLowerCase()
+            .includes(this.appliedFilters[FilterField.Name].toLowerCase()),
+        );
       }
-      
+
       if (this.appliedFilters?.[FilterField.Symbol]) {
-        filteredData = filteredData.filter((c) =>
+        filteredData = filteredData?.filter((c) =>
           c.symbol
             .toLowerCase()
             .includes(this.appliedFilters[FilterField.Symbol].toLowerCase()),
